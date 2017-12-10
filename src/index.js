@@ -52,9 +52,29 @@ router.get('/gifts', (req, res) => {
 router.get('/gift/:gift_id', (req, res) => {
     Gift.findById(req.params.gift_id, (err, gift) => {
         if (err) {
-            return (err)
+            res.send(err)
         }
         res.json(gift)
+    })
+});
+
+router.put('/gift/:gift_id', (req, res) => {
+    Gift.findById(req.params.gift_id, (err, gift) => {
+        if (err) {
+            res.send(err)
+        }
+        if (req.body.recipient) {
+            gift.recipient = req.body.recipient
+        }
+        if (req.body.notes) {
+            gift.notes = req.body.notes
+        }
+        gift.save((err) => {
+            if (err) {
+                res.send(err)
+            }
+            res.json({message: "Gift successfully updated"})
+        })
     })
 });
 
