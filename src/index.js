@@ -78,6 +78,17 @@ router.put('/gift/:gift_id', (req, res) => {
     })
 });
 
+router.delete('/gift/:gift_id', (req, res) => {
+    Gift.remove({
+        _id: req.params.gift_id
+    }, (err, gift) => {
+        if (err) {
+            res.send(err)
+        }
+        res.json({ message: "Gift successfully removed" })
+    })
+});
+
 app.listen(PORT, () => {
     console.log('YAAASSSS')
 })
