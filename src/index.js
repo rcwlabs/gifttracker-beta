@@ -49,6 +49,15 @@ router.get('/gifts', (req, res) => {
     })
 });
 
+router.get('/gift/:gift_id', (req, res) => {
+    Gift.findById(req.params.gift_id, (err, gift) => {
+        if (err) {
+            return (err)
+        }
+        res.json(gift)
+    })
+});
+
 app.listen(PORT, () => {
     console.log('YAAASSSS')
 })
