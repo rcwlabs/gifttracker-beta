@@ -5,6 +5,7 @@ let GiftSchema = new Schema({
     gift: String,
     price: Number,
     store: String,
+    purchased: { type: Boolean, default: false },
     notes: String,
     date: { type: Date, default: Date.now }
 })
