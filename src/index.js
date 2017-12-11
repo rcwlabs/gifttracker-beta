@@ -7,12 +7,12 @@ import config from './config'
 
 const app = express()
 const PORT = config.PORT
-const DB_URL = config.DB_URL
-
-mongoose.connect(DB_URL)
+const BODY_LIMIT = config.BODY_LIMIT
 
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(bodyParser.json())
+app.use(bodyParser.json({
+    limit: BODY_LIMIT
+}))
 app.use('/api', router)
 
 app.get('/', (req, res) => {
